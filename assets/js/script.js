@@ -2,7 +2,7 @@ let par = [];
 
 let cartas = [];
 
-let cardNum = Number(prompt());
+//let cardNum = Number(prompt());
 
 for (x = 0 ; x < cardNum; x++){
     cartas[x];
@@ -38,6 +38,18 @@ const gameFinished = (isGameOver) => {
     if(!isGameOver) return;
     alert();
 }
+
+function flip(event){
+	var element = event.currentTarget;
+	if (element.className === "card") {
+    if(element.style.transform == "rotateY(180deg)") {
+      element.style.transform = "rotateY(0deg)";
+    }
+    else {
+      element.style.transform = "rotateY(180deg)";
+    }
+  }
+};
 
 
 

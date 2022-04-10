@@ -6,6 +6,12 @@
     width: 100%;
 }
 
+.game-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .game-container ul {
     display: flex;
     justify-content: center;
@@ -32,7 +38,7 @@ li {
 }
 
 .card {
-    transition: transform 0.2s;
+    transition: transform 1s;
     transform-style: preserve-3d;
     cursor: pointer;
 }
@@ -47,16 +53,12 @@ li {
     justify-content: center;
     align-items: center;
     backface-visibility: hidden;
-    bottom: 0;
-    right: 0;
-    left: 0;
     transition-property: box-shadow;
     transition-duration: .2s;
     transition-timing-function: ease-in;
 }
 
 .front {
-    
     background-image: url("/assets/img/front.png");
     background-position: 50% 50%;
     background-size: 100px 100px;
@@ -68,7 +70,6 @@ li {
 }
 
 .back {
-    
     transform: rotateY(180deg);
 }
 

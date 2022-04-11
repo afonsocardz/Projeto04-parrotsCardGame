@@ -35,12 +35,20 @@ li {
     width: 117px;
     height: 146px;
     perspective: 1000px;
+   
 }
 
 .card {
     transition: transform 1s;
     transform-style: preserve-3d;
     cursor: pointer;
+    transform: rotateY(0deg);
+}
+
+.card.active {
+    transform: rotateY(180deg);
+    pointer-events: none;
+
 }
 
 .front,

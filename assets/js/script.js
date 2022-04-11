@@ -1,44 +1,13 @@
-let cartas = {
-  bob: {
-    id: "bobrossparrot",
-    couple: false,
-    setNum: 0
-  },
-  explody: {
-    id: "explodyparrot",
-    couple: false,
-    setNum: 0
-  },
-  fiesta: {
-    id: "fiestaparrot",
-    couple: false,
-    setNum: 0
-  },
-  metal: {
-    id: "metalparrot",
-    couple: false,
-    setNum: 0
-  },
-  revertit: {
-    id: "revertitparrot",
-    couple: false,
-    setNum: 0
-  },
-  triplets: {
-    id: "tripletsparrot",
-    couple: false,
-    setNum: 0
-  },
-  unicorn: {
-    id: "unicornparrot",
-    couple: false,
-    setNum: 0
-  }
-};
-
-let gameDeck = [];
+const gameDeck = [];
 
 let par = [];
+
+let selecionados = [];
+
+function allAreTruthy(arr) {
+  return arr.every(element => element);
+}
+
 
 function validateQtyOfCards() {
   let flag = false;
@@ -55,21 +24,27 @@ function validateQtyOfCards() {
   }
   return number;
 }
-
-
 const cardCompare = (par) => {
-
+  let isEnd = [];
   if (par[0] === par[1]) {
-    gameDeck.forEach(carta => {
+    gameDeck[0].forEach(carta => {
       if (carta.id === par[0]) {
-        carta.couple = true;
+        carta.couple = true; 
       }
+      isEnd.push(carta.couple);
     });
+    while (par.length) {
+      console.log("remove");
+      par.pop();
+      selecionados.pop();
+    }
+    if(allAreTruthy(isEnd)) setTimeout(function (){
+      gameFinished()
+    }, 2000) ;
+    
     return true;
   }
-
   return false;
-
 }
 
 function chooseRandom(deck, qtyCards, set) {
@@ -91,8 +66,6 @@ function chooseRandom(deck, qtyCards, set) {
       delete deck[cardList[randomPos]]
     }
   }
-
-
   return randomCard;
 }
 
@@ -101,7 +74,7 @@ function printCard(carta) {
 
   gameTable.innerHTML += `
     <li>
-      <div id="${carta.id}" class="card" onclick="flip(event)">
+      <div id="${carta.id}" class="card" onclick="selectHandler(this)">
         <div class="front"></div>
         <div class="back">
             <img  src="./assets/img/${carta.id}.gif"/>
@@ -111,43 +84,40 @@ function printCard(carta) {
 }
 
 const selectHandler = (ele) => {
-  
+
+  ele.classList.add("active");
+  selecionados.push(ele);
   par.push(ele.id);
+
   console.log(par);
   if (par.length >= 2) {
+    console.log(selecionados);
     if (!cardCompare(par)) {
-      
-      
-    }
-    while (par.length) {
-      par.pop();
+      setTimeout(function () {
+        console.log("aqui" + selecionados)
+        selecionados.forEach(element => {
+          element.classList.remove("active");
+        });
+        while (par.length) {
+          par.pop();
+          selecionados.pop();
+        }
+      }, 1000);
     }
   };
-
 }
 
+const gameFinished = () => {
+  let gameTable = document.querySelector("ul");
+  alert("O jogo acabou!");
+  let isPlayAgain = prompt("Deseja continuar: sim | não");
 
+  if(isPlayAgain === 'não') return;
 
-const gameFinished = (isGameOver) => {
-  if (!isGameOver) return;
-  alert();
+  gameTable.innerHTML = "";
+
+  setupGame();
 }
-
-function flip(event) {
-
-  const element = event.currentTarget;
-
-
-  if (element.className === "card") {
-    if (element.style.transform == "rotateY(180deg)") {
-      element.style.transform = "rotateY(0deg)";
-    }
-    else {
-      element.style.transform = "rotateY(180deg)";
-    }
-  }
-  selectHandler(element);
-};
 
 function prepareDeck(deck, qtyChoose) {
   let newDeck = [];
@@ -180,18 +150,49 @@ function prepareTable(cartas) {
   return deck;
 }
 
-const setupGame = (cartas) => {
-
-  gameDeck = prepareTable(cartas);
-
-  return cartas;
-
-  //gerar html
+const setupGame = () => {
+  let cartas = {
+    bob: {
+      id: "bobrossparrot",
+      couple: false,
+      setNum: 0
+    },
+    explody: {
+      id: "explodyparrot",
+      couple: false,
+      setNum: 0
+    },
+    fiesta: {
+      id: "fiestaparrot",
+      couple: false,
+      setNum: 0
+    },
+    metal: {
+      id: "metalparrot",
+      couple: false,
+      setNum: 0
+    },
+    revertit: {
+      id: "revertitparrot",
+      couple: false,
+      setNum: 0
+    },
+    triplets: {
+      id: "tripletsparrot",
+      couple: false,
+      setNum: 0
+    },
+    unicorn: {
+      id: "unicornparrot",
+      couple: false,
+      setNum: 0
+    }
+  };
+  gameDeck.push(prepareTable(cartas));
 }
 
-setupGame(cartas);
+setupGame();
 
-console.log(cartas);
 
 
 

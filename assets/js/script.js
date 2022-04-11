@@ -116,6 +116,10 @@ const gameFinished = () => {
 
   gameTable.innerHTML = "";
 
+  while(gameDeck.length){
+    gameDeck.pop();
+  }
+
   setupGame();
 }
 

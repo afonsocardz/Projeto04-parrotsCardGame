@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,400&display=swap');
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #EEF9BF;
+    font-weight: bold;
+    color: #75B79E;
+}
+
+header{
+    font-size: 56px;
+    margin-bottom: 47px;
+    margin-top: 40px;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -31,7 +46,7 @@ ul{
 }
 
 li {
-    margin: 0 34px 34px 0;
+    margin: 0 17px 34px 17px;
     width: 117px;
     height: 146px;
     perspective: 1000px;
@@ -83,4 +98,17 @@ li {
 
 .back:hover {
     box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.7);
+}
+
+@media screen and (max-width:768px) {
+
+    header{
+        color: #75B79E;
+        font-size: 26px;
+        font-weight: bold;
+    }
+    ul{
+        flex-direction: column;
+    }
+    
 }

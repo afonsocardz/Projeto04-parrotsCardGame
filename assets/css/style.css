@@ -66,6 +66,10 @@ li {
 
 }
 
+img{
+    width: 100%;
+}
+
 .front,
 .back {
     background-color: #A7E9AF;

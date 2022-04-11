@@ -4,10 +4,11 @@ let par = [];
 
 let selecionados = [];
 
+let jogadas = 0;
+
 function allAreTruthy(arr) {
   return arr.every(element => element);
 }
-
 
 function validateQtyOfCards() {
   let flag = false;
@@ -24,6 +25,7 @@ function validateQtyOfCards() {
   }
   return number;
 }
+
 const cardCompare = (par) => {
   let isEnd = [];
   if (par[0] === par[1]) {
@@ -84,7 +86,7 @@ function printCard(carta) {
 }
 
 const selectHandler = (ele) => {
-
+  jogadas++;
   ele.classList.add("active");
   selecionados.push(ele);
   par.push(ele.id);
@@ -109,12 +111,14 @@ const selectHandler = (ele) => {
 
 const gameFinished = () => {
   let gameTable = document.querySelector("ul");
-  alert("O jogo acabou!");
+  alert(`Você venceu em ${jogadas} jogadas!`);
   let isPlayAgain = prompt("Deseja continuar: sim | não");
 
   if(isPlayAgain === 'não') return;
 
   gameTable.innerHTML = "";
+
+  jogadas = 0;
 
   while(gameDeck.length){
     gameDeck.pop();
